@@ -1,17 +1,21 @@
-// backend/src/models/Task.js
 const mongoose = require('mongoose');
 
-const TaskSchema = new mongoose.Schema({
-  title: { type: String, required: true },
-  description: { type: String },
-  status: { 
-    type: String, 
-    enum: ['pending', 'in-progress', 'completed'], // Enforce specific statuses
-    default: 'pending' 
+const taskSchema = mongoose.Schema({
+  title: {
+    type: String,
+    required: [true, 'Please add a text value'],
   },
-  userId: { 
-    type: mongoose.Schema.Types.ObjectId, 
-    ref: 'User', // Link task to specific user
-    required: true 
+  tag: {
+    type: String,
+    // We can make this optional
   },
-}, { timestamps: true }); // Automatically handles created_at
+  status: {
+    type: String,
+    default: 'todo', // Default to 'todo' column
+  }
+}, {
+  timestamps: true,
+});
+
+// CRITICAL: This line exports the model so 'Task.create' works
+module.exports = mongoose.model('Task', taskSchema);
