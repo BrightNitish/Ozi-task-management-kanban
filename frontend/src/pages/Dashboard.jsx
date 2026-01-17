@@ -30,7 +30,7 @@ const Dashboard = () => {
   const fetchTasks = async () => {
     try {
       // call your backend API
-      const res = await axios.get('http://localhost:5000/api/tasks');
+      const res = await axios.get('https://ozi-task-management-kanban.onrender.com/api/tasks');
       const tasksFromDB = res.data;
 
       // Transform Backend Array -> Frontend Object Structure
@@ -72,7 +72,7 @@ const Dashboard = () => {
   // 4. ADD TASK (Connect to POST /api/tasks)
   const addTask = async (taskData) => {
     try {
-      await axios.post('http://localhost:5000/api/tasks', {
+      await axios.post('https://ozi-task-management-kanban.onrender.com/api/tasks', {
         title: taskData.title,
         tag: taskData.tag,
         status: 'todo' // Default status
@@ -130,7 +130,7 @@ const Dashboard = () => {
 
     // --- Backend Update (Send new status to DB) ---
     try {
-      await axios.put(`http://localhost:5000/api/tasks/${draggableId}`, {
+      await axios.put(`https://ozi-task-management-kanban.onrender.com/api/tasks/${draggableId}`, {
         status: destination.droppableId // 'todo', 'in-progress', or 'done'
       });
     } catch (error) {
@@ -163,7 +163,7 @@ const Dashboard = () => {
 
     // Call Backend
     try {
-      await axios.delete(`http://localhost:5000/api/tasks/${taskId}`);
+      await axios.delete(`https://ozi-task-management-kanban.onrender.com/api/tasks/${taskId}`);
     } catch (error) {
       console.error("Error deleting task:", error);
       alert("Failed to delete task");
